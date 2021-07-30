@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <title>Document</title>
+    
+</head>
+<style type="text/css">
+    #aa {
+        width: 800px;
+        height: 700px;
+        text-align: center;
+        border: 1px dashed black;
+        margin: 0 auto;
+    }
+
+
+    #input {
+        width: 600px;
+        height: 40px;
+        margin-left: 70px;
+      
+    }
+
+     #down{
+    width: 700px;
+    height: 40px;
+    margin-left: 70px;
+} 
+    th {
+        width: 600px;
+        height: 5px;
+        border: none;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div id="aa">
+        <h1>任务清单</h1>
+        <span>
+            <input id="input" type="text">
+            <input type="button" value="add" onclick="addinput(this)">
+        </span>
+        <div>
+            <table>
+                <tr>
+                    <th>任务</th>
+                    <th>时间</th>
+                    <th>选择</th>
+                </tr>
+            </table>
+            <table id="down">
+
+            </table>
+        </div>
+    </div>
+
+    <script>
+        //添加
+        function addinput(dom) {
+            var minput = $("#input").val();
+            var date = new Date();
+            var day = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")[date.getDay()];
+            var datetime = date.getFullYear() + "年" + ((date.getMonth()) + 1) + "月" + date.getDate() + "日" + "  " + date.getHours() + ":" + date.getUTCMinutes() + ":" + date.getSeconds() + "  " + day;
+
+            var downTrDom = $("<tr>"
+                + " <td>" + minput + "</td>"
+                + " <td>" + datetime + "</td>"
+                + " <td>"
+                + "  <input type='button' value='done'  onclick='over(this)'/>"
+                + "  <input type='button' value='delete' onclick='del(this)'/>"
+                + " </td>" + "</tr>"
+            );
+            $("#down").append(downTrDom);
+        }
+
+        //删除
+        function del(dom) {
+            $(dom).parent().parent().remove();
+        }
+
+        //完成
+        function over(dom) {
+            var trs = $(dom).parent().parent().css("color", "red");
+            $(trs).css({ "text-decoration": "line-through", "color": "red" });
+        }
+    </script>
+
+
+</body>
+
+</html>
